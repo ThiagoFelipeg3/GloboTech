@@ -8,7 +8,7 @@ export class TeamRequester extends Requester {
 
     private method: Method = 'GET';
 
-    constructor(private teamId: number) {
+    constructor(private teamId: string) {
         super();
     }
 

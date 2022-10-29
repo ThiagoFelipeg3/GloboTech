@@ -1,6 +1,6 @@
-import fetch from 'node-fetch';
+import fetch from 'node-fetch'
 import { Method } from '../enums/methods';
-import { IRequester } from '../interfaces/requester';
+import { IRequester, Options } from '../interfaces/requester';
 
 export abstract class Requester implements IRequester {
     protected sufixUrl = 'esportes/futebol/modalidades/futebol_de_campo/categorias/profissional';
@@ -24,7 +24,7 @@ export abstract class Requester implements IRequester {
 
     protected abstract getUrl(): string;
 
-    protected abstract getOptions();
+    protected abstract getOptions(): Options;
 
     protected abstract getMethod(): Method;
 }

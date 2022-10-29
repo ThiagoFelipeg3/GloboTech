@@ -8,12 +8,12 @@ export class ChampionshipRequester extends Requester {
 
     private method: Method = 'GET';
 
-    constructor(private championship: string) {
+    constructor(private championshipId: string) {
         super();
     }
 
     protected getUrl(): string {
-        return `${this.url}/${this.sufixUrl}/campeonato/${this.championship}`
+        return `${this.url}/${this.sufixUrl}/campeonato/${this.championshipId}`
     }
 
     public getOptions(): Options {
