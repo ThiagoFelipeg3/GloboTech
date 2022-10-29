@@ -5,7 +5,6 @@ import {
     HttpResponse
 } from '../../interfaces/http'
 
-
 export const adaptExpress = (controller: Controller) => {
     return async (req: Request, res: Response) => {
         const httpRequest: HttpRequest = {
