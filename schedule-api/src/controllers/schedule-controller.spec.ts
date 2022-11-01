@@ -47,4 +47,14 @@ describe('Schedule Controller', () => {
 
         expect(httpResponse).toEqual(ok({}))
     })
+
+    test('Should return 400 if unsuccessful', async () => {
+        const { sut, scheduleServiceStub } = makeSut()
+        jest.spyOn(scheduleServiceStub, 'games').mockReturnValueOnce(
+            Promise.reject(new Error('Any Error'))
+        )
+        const httpResponse = await sut.handle(makeFakeRequest())
+
+        expect(httpResponse).toEqual(serverError(new Error('Any Error')))
+    })
 });
