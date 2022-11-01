@@ -1,6 +1,11 @@
-import { HttpRequest } from '../interfaces/http';
+import { serverError, ok } from '../helpers/http-helper';
+import { HttpRequest, HttpResponse } from '../interfaces/http';
 import { Schedule } from '../interfaces/schedule';
 import ScheduleController from './schedule-controller';
+
+const makeFakeRequest = (): HttpRequest => ({
+    params: { date: '2021-01-01'}
+});
 
 const makeScheduleServiceStub = (): Schedule => {
     class ScheduleServiceStub implements Schedule {
@@ -31,11 +36,15 @@ describe('Schedule Controller', () => {
     test('Should call Schedule with correnct values', async () => {
         const { sut, scheduleServiceStub } = makeSut();
         const stubSpy = jest.spyOn(scheduleServiceStub, 'games');
-        const request: HttpRequest = {
-            params: { date: '2021-01-01'}
-        }
 
-        await sut.handle(request);
+        await sut.handle(makeFakeRequest());
         expect(stubSpy).toHaveBeenCalledWith('2021-01-01');
     });
+
+    test('Should return 200 if successful', async () => {
+        const { sut } = makeSut()
+        const httpResponse = await sut.handle(makeFakeRequest());
+
+        expect(httpResponse).toEqual(ok({}))
+    })
 });
