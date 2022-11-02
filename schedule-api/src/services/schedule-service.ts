@@ -1,15 +1,27 @@
 import { RequesterFactory } from '../factories/requester-factory';
+import { Cache } from '../interfaces/cache';
 import { Schedule } from '../interfaces/schedule';
 import { Games, Phases, Teams } from '../interfaces/schedule-response';
 
 export class ScheduleService implements Schedule {
-    constructor (private requester: RequesterFactory) {}
+    constructor (private requester: RequesterFactory, private cache: Cache) {}
 
-    public async games(date: string): Promise<{[key: string]: Phases[]}> {
+    public async games(
+        date: string
+    ): Promise<{[key: string]: {[key: string]: Phases}}> {
+        const expireInSeconds = 3600;
+        let games = await this.cache.get(date);
+        if (games) {
+            return games;
+        }
+
         const requester = this.requester.createRequester('game', date);
         const response = await requester?.makeRequest();
+        games = await this.formatResponse(response);
 
-        return this.formatResponse(response);
+        await this.cache.set(date, games, expireInSeconds);
+
+        return games;
     }
 
     private async formatResponse(response: any) {
