@@ -1,0 +1,123 @@
+{
+    "Campeonato Inglês": {
+        "Fase única": {
+            "fase_id": 5756,
+            "ordem": 1,
+            "data_inicio": "2018-08-10",
+            "data_fim": "2019-05-12",
+            "nome": "Fase única",
+            "edicao_id": 2701,
+            "nome_edicao": "Campeonato Inglês 2018/19",
+            "jogos": [
+                {
+                    "vencedor_jogo": {
+                        "equipe_id": 2936,
+                        "label": "visitante"
+                    },
+                    "rodada": 21,
+                    "placar": {
+                        "2668": 0,
+                        "2936": 1
+                    },
+                    "suspenso": false,
+                    "data_hora_realizacao": "2019-01-01 10:30:00",
+                    "nome_sede": "Goodison Park",
+                    "equipes": {
+                        "2668": {
+                            "nome": "Everton Football Club",
+                            "apelido": "Everton",
+                            "escudos": {
+                                "60x60": "https://s.glbimg.com/es/sde/f/organizacoes/2017/10/22/Everton-65.png",
+                                "30x30": "https://s.glbimg.com/es/sde/f/organizacoes/2017/10/22/Everton-30.png",
+                                "svg": null,
+                                "45x45": "https://s.glbimg.com/es/sde/f/organizacoes/2017/10/22/Everton-45.png"
+                            }
+                        },
+                        "2936": {
+                            "nome": "Leicester City Football Club",
+                            "apelido": "Leicester",
+                            "escudos": {
+                                "60x60": "https://s.glbimg.com/es/sde/f/equipes/2014/07/22/lei65.png",
+                                "30x30": "https://s.glbimg.com/es/sde/f/equipes/2014/07/22/lei30.png",
+                                "svg": null,
+                                "45x45": "https://s.glbimg.com/es/sde/f/equipes/2014/07/22/lei45.png"
+                            }
+                        }
+                    }
+                },
+                {
+                    "vencedor_jogo": {
+                        "equipe_id": 2663,
+                        "label": "mandante"
+                    },
+                    "rodada": 21,
+                    "placar": {
+                        "2663": 4,
+                        "2673": 1
+                    },
+                    "suspenso": false,
+                    "data_hora_realizacao": "2019-01-01 13:00:00",
+                    "nome_sede": "Emirates Stadium",
+                    "equipes": {
+                        "2663": {
+                            "nome": "Arsenal Football Club",
+                            "apelido": "Arsenal",
+                            "escudos": {
+                                "60x60": "https://s.glbimg.com/es/sde/f/equipes/2013/09/16/arsenal_60x60.png",
+                                "30x30": "https://s.glbimg.com/es/sde/f/equipes/2013/09/16/arsenal_30x30.png",
+                                "svg": "https://s.glbimg.com/es/sde/f/equipes/2018/03/11/arsenal.svg",
+                                "45x45": "https://s.glbimg.com/es/sde/f/equipes/2013/09/16/arsenal_45x45.png"
+                            }
+                        },
+                        "2673": {
+                            "nome": "Fulham Football Club",
+                            "apelido": "Fulham",
+                            "escudos": {
+                                "60x60": "https://s.glbimg.com/es/sde/f/original/2011/01/26/fulhan.png",
+                                "30x30": "https://s.glbimg.com/es/sde/f/original/2011/01/26/fulham.png",
+                                "svg": null,
+                                "45x45": "https://s.glbimg.com/es/sde/f/original/2011/01/26/fulham_.png"
+                            }
+                        }
+                    }
+                },
+                {
+                    "vencedor_jogo": {
+                        "equipe_id": 2664,
+                        "label": "visitante"
+                    },
+                    "rodada": 21,
+                    "placar": {
+                        "2664": 3,
+                        "3176": 0
+                    },
+                    "suspenso": false,
+                    "data_hora_realizacao": "2019-01-01 15:30:00",
+                    "nome_sede": "Cardiff City Stadium",
+                    "equipes": {
+                        "2664": {
+                            "nome": "Tottenham Hotspur Football Club",
+                            "apelido": "Tottenham",
+                            "escudos": {
+                                "60x60": "https://s.glbimg.com/es/sde/f/organizacoes/2017/10/16/Totheham-65.png",
+                                "30x30": "https://s.glbimg.com/es/sde/f/organizacoes/2017/10/16/Totheham-30.png",
+                                "svg": "https://s.glbimg.com/es/sde/f/organizacoes/2018/03/11/tottenham.svg",
+                                "45x45": "https://s.glbimg.com/es/sde/f/organizacoes/2017/10/16/Totheham-45.png"
+                            }
+                        },
+                        "3176": {
+                            "nome": "Cardiff City Football Club",
+                            "apelido": "Cardiff",
+                            "escudos": {
+                                "60x60": "https://s.glbimg.com/es/sde/f/organizacoes/2018/01/25/PIDA-pedido-62-arte-2.png",
+                                "30x30": "https://s.glbimg.com/es/sde/f/organizacoes/2018/01/24/PIDA-pedido-62-arte-3.png",
+                                "svg": null,
+                                "45x45": "https://s.glbimg.com/es/sde/f/organizacoes/2018/01/25/PIDA-pedido-62-arte-1.png"
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}
