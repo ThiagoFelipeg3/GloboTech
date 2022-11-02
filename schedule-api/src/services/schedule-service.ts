@@ -29,18 +29,10 @@ export class ScheduleService implements Schedule {
                     accumulatorGames[championship.nome] = {};
                 }
 
-                const formatFase = {
-                    fase_id: fase.fase_id,
-                    ordem: fase.ordem,
-                    data_inicio: fase.data_inicio,
-                    data_fim: fase.data_fim,
-                    nome: fase.nome
-                }
-
                 if (!accumulatorGames[championship.nome][fase.nome]) {
                     accumulatorGames[championship.nome][fase.nome] = {
-                        ...formatFase,
-                        nome: edition.nome,
+                        ...fase,
+                        nome_edicao: edition.nome,
                         jogos: []
                     };
                 }
@@ -49,7 +41,7 @@ export class ScheduleService implements Schedule {
                 placar[game.equipe_mandante_id] = game.placar_oficial_mandante;
                 placar[game.equipe_visitante_id] = game.placar_oficial_visitante;
 
-                accumulatorGames[championship.nome][fase.nome]['jogos'].push({
+                const jogos = {
                     vencvencedor_jogo: game.vencedor_jogo,
                     rodada: game.rodada,
                     placar,
@@ -57,7 +49,9 @@ export class ScheduleService implements Schedule {
                     data_hora_realizacao: `${game.data_realizacao} ${game.hora_realizacao}`,
                     nome_sede: sede.nome,
                     equipes: teams
-                })
+                };
+
+                accumulatorGames[championship.nome][fase.nome]['jogos'].push(jogos);
 
                 return Promise.resolve(accumulatorGames);
             },
@@ -68,11 +62,13 @@ export class ScheduleService implements Schedule {
     private async getFormattedAttributes(game: any, referencias: any): Promise<any> {
         const { equipes, fases, edicoes, campeonatos, sedes } = referencias;
 
-        const fase = fases[game.fase_id];
+        const fase = this.getFormattedPhase(game.fase_id, fases);
         const edition = edicoes[fase.edicao_id];
         const teams = await this.getFormattedTeams(game, equipes);
         const championship = await this.getChampionship(edition, campeonatos);
         const sede = sedes[game.sede_id];
+
+        delete fase.edicao_id;
 
         return [
             teams,
@@ -83,24 +79,16 @@ export class ScheduleService implements Schedule {
         ];
     }
 
-    private getPhaseFormat(faseId: number, fases: any) {
+    private getFormattedPhase(faseId: number, fases: any) {
         const fase = fases[faseId];
-        const {
-            fase_id,
-            edicao_id,
-            ordem,
-            data_inicio,
-            data_fim,
-            nome
-        } = fase;
 
         return {
-            fase_id,
-            edicao_id,
-            ordem,
-            data_inicio,
-            data_fim,
-            nome
+            fase_id: fase.fase_id,
+            ordem: fase.ordem,
+            data_inicio: fase.data_inicio,
+            data_fim: fase.data_fim,
+            nome: fase.nome,
+            edicao_id: fase.edicao_id
         };
     }
 
