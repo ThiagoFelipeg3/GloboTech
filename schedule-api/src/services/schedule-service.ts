@@ -1,10 +1,11 @@
 import { RequesterFactory } from '../factories/requester-factory';
 import { Schedule } from '../interfaces/schedule';
+import { Games, Phases, Teams } from '../interfaces/schedule-response';
 
 export class ScheduleService implements Schedule {
     constructor (private requester: RequesterFactory) {}
 
-    public async games(date: string): Promise<any> {
+    public async games(date: string): Promise<{[key: string]: Phases[]}> {
         const requester = this.requester.createRequester('game', date);
         const response = await requester?.makeRequest();
 
@@ -41,8 +42,8 @@ export class ScheduleService implements Schedule {
                 placar[game.equipe_mandante_id] = game.placar_oficial_mandante;
                 placar[game.equipe_visitante_id] = game.placar_oficial_visitante;
 
-                const jogos = {
-                    vencvencedor_jogo: game.vencedor_jogo,
+                const jogos: Games = {
+                    vencedor_jogo: game.vencedor_jogo,
                     rodada: game.rodada,
                     placar,
                     suspenso: game.suspenso,
@@ -68,8 +69,6 @@ export class ScheduleService implements Schedule {
         const championship = await this.getChampionship(edition, campeonatos);
         const sede = sedes[game.sede_id];
 
-        delete fase.edicao_id;
-
         return [
             teams,
             fase,
@@ -79,7 +78,7 @@ export class ScheduleService implements Schedule {
         ];
     }
 
-    private getFormattedPhase(faseId: number, fases: any) {
+    private getFormattedPhase(faseId: number, fases: any): Phases {
         const fase = fases[faseId];
 
         return {
@@ -92,7 +91,7 @@ export class ScheduleService implements Schedule {
         };
     }
 
-    private async getFormattedTeams(game: any, equipes: any): Promise<any> {
+    private async getFormattedTeams(game: any, equipes: any): Promise<Teams> {
         const { equipe_mandante_id, equipe_visitante_id } = game;
         const teamsIds = [equipe_mandante_id, equipe_visitante_id];
 
