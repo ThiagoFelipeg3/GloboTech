@@ -18,13 +18,12 @@ export class ScheduleService implements Schedule {
             async (accGames: any, game: any) => {
                 const accumulatorGames = await accGames;
                 const [
-                    homeTeam,
-                    awayTeam,
+                    teams,
                     fase,
                     edition,
                     championship,
                     sede
-                ] = await this.getAttributes(game, referencias)
+                ] = await this.getFormattedAttributes(game, referencias)
 
                 if (!accumulatorGames[championship.nome]) {
                     accumulatorGames[championship.nome] = {};
@@ -50,18 +49,6 @@ export class ScheduleService implements Schedule {
                 placar[game.equipe_mandante_id] = game.placar_oficial_mandante;
                 placar[game.equipe_visitante_id] = game.placar_oficial_visitante;
 
-                const equipes: any = {};
-                equipes[game.equipe_mandante_id] = {
-                    nome: homeTeam.nome,
-                    apelido: homeTeam.apelido,
-                    escudos: homeTeam. escudos
-                };
-                equipes[game.equipe_visitante_id] = {
-                    nome: awayTeam.nome,
-                    apelido: awayTeam.apelido,
-                    escudos: awayTeam. escudos
-                };;
-
                 accumulatorGames[championship.nome][fase.nome]['jogos'].push({
                     vencvencedor_jogo: game.vencedor_jogo,
                     rodada: game.rodada,
@@ -69,7 +56,7 @@ export class ScheduleService implements Schedule {
                     suspenso: game.suspenso,
                     data_hora_realizacao: `${game.data_realizacao} ${game.hora_realizacao}`,
                     nome_sede: sede.nome,
-                    equipes
+                    equipes: teams
                 })
 
                 return Promise.resolve(accumulatorGames);
@@ -78,18 +65,17 @@ export class ScheduleService implements Schedule {
         );
     }
 
-    private async getAttributes(game: any, referencias: any): Promise<any> {
+    private async getFormattedAttributes(game: any, referencias: any): Promise<any> {
         const { equipes, fases, edicoes, campeonatos, sedes } = referencias;
 
         const fase = fases[game.fase_id];
         const edition = edicoes[fase.edicao_id];
-        const [ homeTeam, awayTeam ] = await this.getTeams(game, equipes);
+        const teams = await this.getFormattedTeams(game, equipes);
         const championship = await this.getChampionship(edition, campeonatos);
         const sede = sedes[game.sede_id];
 
         return [
-            homeTeam,
-            awayTeam,
+            teams,
             fase,
             edition,
             championship,
@@ -118,23 +104,22 @@ export class ScheduleService implements Schedule {
         };
     }
 
-    private async getTeams(game: any, equipes: any): Promise<any> {
+    private async getFormattedTeams(game: any, equipes: any): Promise<any> {
         const { equipe_mandante_id, equipe_visitante_id } = game;
+        const teamsIds = [equipe_mandante_id, equipe_visitante_id];
 
-        if (
-            equipe_mandante_id in equipes
-            && equipe_visitante_id in equipes
-        ) {
-            return [ equipes[equipe_mandante_id], equipes[equipe_visitante_id] ];
-        }
+        return teamsIds.reduce(async (accTems, teamId) => {
+            const accumulatorTeams = await accTems;
+            const team = equipes[teamId] || await this.requester.createRequester('team', teamId)?.makeRequest();
 
-        const homeTeam = this.requester.createRequester('team', equipe_mandante_id);
-        const awayTeam = this.requester.createRequester('team', equipe_mandante_id);
+            accumulatorTeams[teamId] = {
+                nome: team.nome,
+                apelido: team.apelido,
+                escudos: team. escudos
+            };
 
-        return Promise.all([
-            homeTeam?.makeRequest(),
-            awayTeam?.makeRequest(),
-        ]);
+            return Promise.resolve(accumulatorTeams);
+        }, Promise.resolve({}));
     }
 
     private async getChampionship(edition: any, campeonatos: any): Promise<any> {
