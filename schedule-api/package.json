@@ -9,7 +9,7 @@
     "dev": "nodemon",
     "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
     "test:unit": "npm test -- --watch -c jest-unit-config.js",
-    "test:ab": "npx autocannon -c 1000 -d 10 --workers 10 --renderStatusCodes --latency --warmup [ -c 1 -d 2] http://localhost:8000/api/schedule/2019-01-01"
+    "test:ab": "npx autocannon -c 1000 -d 30 --workers 10 --renderStatusCodes --latency --warmup [ -c 1 -d 2] http://localhost:8000/api/schedule/2019-01-01"
   },
   "author": "Thiago Felipe",
   "license": "ISC",

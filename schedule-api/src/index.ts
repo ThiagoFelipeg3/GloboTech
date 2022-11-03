@@ -1,16 +1,18 @@
-import os from 'os'
-import cluster from 'cluster'
+import cluster from 'cluster';
+import { cpus } from 'os';
+import process from 'process';
+
 
 const runPrimaryProcess = () => {
-    const numberWorkers = os.cpus().length * 2;
+    const numberWorkers = cpus().length * 2;
+    console.log(`Primary ${process.pid} is running`);
 
-    for (let index = 0; index < numberWorkers; index++) {
-        cluster.fork();
-    }
+    for (let index = 0; index < numberWorkers; index++)
+    cluster.fork();
 }
 
 const runWorkerProcess = async () => {
     await import('./server');
 }
 
-cluster.isPrimary ? runPrimaryProcess() : runWorkerProcess()
+cluster.isWorker ? runWorkerProcess() : runPrimaryProcess()
