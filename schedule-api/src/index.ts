@@ -1,4 +1,16 @@
-import env from './configs/env';
-import app from './configs/app';
+import os from 'os'
+import cluster from 'cluster'
 
-app.listen(env.port, () => console.log(`Server running at http://localhost:${env.port}`))
+const runPrimaryProcess = () => {
+    const numberWorkers = os.cpus().length * 2;
+
+    for (let index = 0; index < numberWorkers; index++) {
+        cluster.fork();
+    }
+}
+
+const runWorkerProcess = async () => {
+    await import('./server');
+}
+
+cluster.isPrimary ? runPrimaryProcess() : runWorkerProcess()

@@ -8,7 +8,8 @@
     "start": "npm run build && node dist/index.js",
     "dev": "nodemon",
     "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
-    "test:unit": "npm test -- --watch -c jest-unit-config.js"
+    "test:unit": "npm test -- --watch -c jest-unit-config.js",
+    "test:ab": "npx autocannon -c 1000 -d 10 --workers 10 --renderStatusCodes --latency --warmup [ -c 1 -d 2] http://localhost:8000/api/schedule/2019-01-01"
   },
   "author": "Thiago Felipe",
   "license": "ISC",
@@ -25,6 +26,7 @@
     "@types/node": "^18.11.7",
     "@types/node-fetch": "^2.6.2",
     "@types/redis": "^2.8.21",
+    "autocannon": "^7.10.0",
     "jest": "^29.2.2",
     "nodemon": "^2.0.20",
     "ts-jest": "^29.0.3",

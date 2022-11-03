@@ -5,4 +5,5 @@ export interface Cache {
         value: any,
         expireInSeconds: number,
     ): any;
+    increment(key: string): any;
 }

@@ -11,6 +11,7 @@ export class ScheduleService implements Schedule {
     ): Promise<{[key: string]: {[key: string]: Phases}}> {
         const expireInSeconds = 3600;
         let games = await this.cache.get(date);
+        this.cache.increment(`${date}-quantity`);
         if (games) {
             return games;
         }

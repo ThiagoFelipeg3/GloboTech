@@ -61,6 +61,15 @@ export class RedisService implements Cache {
         }
     }
 
+    public increment(key: string): any {
+        try {
+            this.client.incr(this.formatKey(key));
+            this.client.expire(this.formatKey(key), 3600);
+        } catch (error) {
+            /** continue regardless of error */
+        }
+    }
+
     private uncompress(data: any): any {
         try {
             const buffer = Buffer.from(data, 'base64');
