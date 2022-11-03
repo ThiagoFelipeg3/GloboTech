@@ -1,5 +1,17 @@
 version: "3"
 services:
+  app:
+    image: schedule_api
+    container_name: schedule_api
+    restart: always
+    build:
+      context: .
+      dockerfile: './Dockerfile'
+    ports:
+      - "8000:8000"
+    networks:
+      schedule_network:
+        ipv4_address: 172.16.238.3
   redis:
     image: "redis:alpine"
     restart: always
