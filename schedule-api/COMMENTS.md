@@ -23,6 +23,9 @@ Se analizar o código vai perceber que tentei abstair ao máximo algumas respons
 Entre o express e a base de código utilizei um padrão chamado **adapter**, afim de reduzir os riscos de quebra em uma possível alteraçõa de framework.
 Obviamente é raro realizar uma alteração deste tipo, porém se precisar realizar a troca do express por outro, fica mais simples, é só o novo serviço implementar este adapter.
 
+Tentei facilitar a vida do cliente, retornando uma estrutura agrupada, um campeonato tem n fases, e uma fase tem n jogos, acredito que isso facitaria no momento de apresentar os jogos,
+não precisando reorganizar e procutar onde cada jogo faz parte.
+
 ### Mudanças futuras
 
 Hoje oque é feito é salvar em cache a pesquisa a partir da data, porém com um pouco mais de tempo realizaria mais mudança

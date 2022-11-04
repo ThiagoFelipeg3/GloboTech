@@ -1,8 +1,11 @@
-## [NOME CANDIDATO]
+## Thiago Felipe
+
 **Globo.com: coding challenge**
 
 ====================
+
 #### Considerações Gerais
+
 Você deverá usar este repositório como o repo principal do projeto, i.e., todos os seus commits devem estar registrados aqui, pois queremos ver como você trabalha.
 
 Devemos conseguir rodar seu código em um Mac OS X OU no Ubuntu;

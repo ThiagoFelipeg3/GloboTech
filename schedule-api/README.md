@@ -63,3 +63,58 @@ Segue o cURL para request
 curl --location --request GET 'http://172.16.238.3:8000/api/schedule/2019-01-01' \
 --header 'x-secret: any_hash'
 ```
+
+
+```json
+{
+    "Campeonato Inglês": {
+        "Fase única": {
+            "fase_id": 5756,
+            "ordem": 1,
+            "data_inicio": "2018-08-10",
+            "data_fim": "2019-05-12",
+            "nome": "Fase única",
+            "edicao_id": 2701,
+            "nome_edicao": "Campeonato Inglês 2018/19",
+            "jogos": [
+                {
+                    "vencedor_jogo": {
+                        "equipe_id": 2936,
+                        "label": "visitante"
+                    },
+                    "rodada": 21,
+                    "placar": {
+                        "2668": 0,
+                        "2936": 1
+                    },
+                    "suspenso": false,
+                    "data_hora_realizacao": "2019-01-01 10:30:00",
+                    "nome_sede": "Goodison Park",
+                    "equipes": {
+                        "2668": {
+                            "nome": "Everton Football Club",
+                            "apelido": "Everton",
+                            "escudos": {
+                                "60x60": "https://s.glbimg.com/es/sde/f/organizacoes/2017/10/22/Everton-65.png",
+                                "30x30": "https://s.glbimg.com/es/sde/f/organizacoes/2017/10/22/Everton-30.png",
+                                "svg": null,
+                                "45x45": "https://s.glbimg.com/es/sde/f/organizacoes/2017/10/22/Everton-45.png"
+                            }
+                        },
+                        "2936": {
+                            "nome": "Leicester City Football Club",
+                            "apelido": "Leicester",
+                            "escudos": {
+                                "60x60": "https://s.glbimg.com/es/sde/f/equipes/2014/07/22/lei65.png",
+                                "30x30": "https://s.glbimg.com/es/sde/f/equipes/2014/07/22/lei30.png",
+                                "svg": null,
+                                "45x45": "https://s.glbimg.com/es/sde/f/equipes/2014/07/22/lei45.png"
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}
+```
