@@ -5,9 +5,23 @@ import { Options } from '../interfaces/requester';
 import { Schedule } from '../interfaces/schedule';
 import { Requester } from '../requesters/requester';
 import { ScheduleService } from './schedule-service';
+import { Cache } from '../interfaces/cache';
 
 const formattedResponse = require('../../data/mocks/response.json');
 const response = require('../../data/mocks/response_jogo_ge.json');
+
+const makeCache = (): Cache => {
+    class CacheMock implements Cache {
+        public get(key: string): Promise<any> {
+            return Promise.resolve()
+        }
+        public set(key: string, value: any, expireInSeconds: number): any {}
+
+        public increment(key: string) {}
+    }
+
+    return new CacheMock();
+};
 
 const makeRequesterMock = (): Requester => {
     class RequesterMock extends Requester {
@@ -58,7 +72,7 @@ interface SutTypes {
 
 const makeSut = (): SutTypes => {
     const requesterFactoryStub = makeRequesterFactory();
-    const sut = new ScheduleService(requesterFactoryStub);
+    const sut = new ScheduleService(requesterFactoryStub, makeCache());
 
     return {
         sut,
