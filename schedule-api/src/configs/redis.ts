@@ -1,6 +1,6 @@
 export default {
     api: {
-        host: '172.16.238.2',
-        port: 6379
+        host: process.env.REDIS_HOST,
+        port: process.env.PORT
     }
 };
