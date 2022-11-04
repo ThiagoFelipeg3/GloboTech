@@ -1,4 +1,4 @@
-import { RedisService } from '../adapters/express/database/redis/redis-service';
+import { RedisService } from '../database/redis/redis-service';
 import ScheduleController from '../controllers/schedule-controller';
 import { Controller } from '../interfaces/controller';
 import { ScheduleService } from '../services/schedule-service';

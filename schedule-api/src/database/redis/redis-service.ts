@@ -1,6 +1,6 @@
 import * as redis from 'redis';
-import configRedis from '../../../../configs/redis';
-import { Cache } from '../../../../interfaces/cache';
+import configRedis from '../../configs/redis';
+import { Cache } from '../../interfaces/cache';
 
 import { promisify } from 'util';
 import * as zlib from 'zlib';
