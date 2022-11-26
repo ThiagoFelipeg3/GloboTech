@@ -16,8 +16,16 @@ const makeCache = (): Cache => {
             return Promise.resolve()
         }
         public set(key: string, value: any, expireInSeconds: number): any {}
-
         public increment(key: string) {}
+        public async eval(
+            script: string,
+            key: string,
+            window: number,
+            limit: number,
+            numberKeys = 1
+        ): Promise<boolean> {
+            return Promise.resolve(true);
+        }
     }
 
     return new CacheMock();
