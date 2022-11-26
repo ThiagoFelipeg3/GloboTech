@@ -1,8 +1,9 @@
+import { ApiLimitExceededError } from '../exceptions/api-limit-exceeded-error'
 import { ServerError } from '../exceptions/server-error'
 import { UnauthorizedError } from '../exceptions/unauthorized-error'
 import { HttpResponse } from '../interfaces/http'
 
-export const ok = (data: any): HttpResponse => ({
+export const ok = (data: any = {}): HttpResponse => ({
     statusCode: 200,
     body: data
 })
@@ -25,4 +26,9 @@ export const serverError = (error: Error): HttpResponse => ({
 export const unauthorized = (): HttpResponse => ({
     statusCode: 401,
     body: new UnauthorizedError()
+})
+
+export const limitExceededError = (): HttpResponse => ({
+    statusCode: 429,
+    body: new ApiLimitExceededError()
 })
