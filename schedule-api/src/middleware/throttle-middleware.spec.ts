@@ -42,4 +42,12 @@ describe('ThrottleMiddleware Middleware', () => {
 
         expect(httpResponse).toEqual(limitExceededError())
     })
+
+    test('Should return void when limit is not exceeded', async () => {
+        const { sut } = makeSut();
+        const httpResponse = await sut.handle()
+
+        expect(httpResponse).toEqual(undefined);
+        expect(httpResponse).toBeUndefined
+    })
 });
