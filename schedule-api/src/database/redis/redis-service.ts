@@ -70,6 +70,19 @@ export class RedisService implements Cache {
         }
     }
 
+    public async eval(
+        script: string,
+        key: string,
+        window: number,
+        limit: number,
+        numberKeys = 1
+    ): Promise<boolean> {
+        const getAsync: any = promisify(this.client.eval).bind(this.client);
+
+        return getAsync(script, numberKeys, this.formatKey(key), window, limit);
+    }
+
+
     private uncompress(data: any): any {
         try {
             const buffer = Buffer.from(data, 'base64');

@@ -6,4 +6,11 @@ export interface Cache {
         expireInSeconds: number,
     ): any;
     increment(key: string): any;
+    eval(
+        script: string,
+        key: string,
+        window: number,
+        limit: number,
+        numberKeys?: number
+    ): Promise<boolean>;
 }
